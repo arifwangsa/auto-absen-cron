@@ -1,0 +1,22 @@
+name: Auto Absen Alpa Scheduled Cron
+
+on:
+  schedule:
+    # 05:00 UTC sama dengan 13:00 WITA (Makassar)
+    - cron: '0 5 * * *'
+  workflow_dispatch: # Memungkinkan tombol tes manual
+
+jobs:
+  run-auto-absent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Jalankan Skrip Auto Absen
+        run: node auto-absent.js
